@@ -73,7 +73,6 @@
             <a href="CartController">Корзина</a>
             <a href="ContactServlet">Контакты</a>
             <a href="LogoutServlet">Выход</a>
-<%--            <a href="AdminPanelServlet">Админ панель</a>--%>
             <input id="input" name="title" type="text" placeholder="Поиск"/>
         </div>
     </form>
