@@ -70,5 +70,8 @@ public class AdminPanelServlet extends HttpServlet {
                 Integer.parseInt(request.getParameter("id")),
                 Boolean.parseBoolean(request.getParameter("block"))
         );
+                    Logger logger = LogManager.getLogger(AdminPanelServlet.class);
+//            logger.info(Boolean.parseBoolean(request.getParameter("block")));
+            logger.info(request.getParameter("id"));
     }
 }

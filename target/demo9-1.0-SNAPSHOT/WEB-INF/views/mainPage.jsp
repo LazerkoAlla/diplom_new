@@ -167,12 +167,11 @@
     <form method="POST" action="MainPageServlet">
     <div id="div">
         <a href="MainPageServlet">Главная страница</a>
-<%--        <a href="BookInfoServlet">About</a>--%>
-        <a href="CartController">Корзина</a>
+<%--        <a href="CartController">Корзина</a>--%>
         <a href="ContactServlet">Контакты</a>
         <a href="LoginServlet">Вход</a>
         <a href="RegisterServlet">Регистрация</a>
-        <a href="AdminPanelServlet">Админ панель</a>
+<%--        <a href="AdminPanelServlet">Админ панель</a>--%>
 <%--        поменяла--%>
         <input id="input" name="title" type="text" placeholder="Поиск"/>
 <%--        <%@include file="adminPage.jsp"%>--%>
@@ -208,7 +207,7 @@
 <div id="wrapper">
     <c:if test="${books.size() == 0}">
         <div class="h1block">
-            <h2> Sorry, no books found... Please search again. </h2>
+            <h2> Извините, такой книги нет. Повторите свой поиск. </h2>
         </div>
     </c:if>
     <c:forEach items="${books}" var="book">

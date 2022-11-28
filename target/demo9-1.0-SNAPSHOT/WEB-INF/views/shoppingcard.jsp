@@ -10,34 +10,104 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <style>
-        /*thead {*/
-        /*    color: #567ec4;*/
-        /*    line-height: 1.5;*/
-        /*    text-align: justify;*/
-        /*    font-weight: bold;*/
-        /*    padding: 3px;*/
-        /*    border-color: black;*/
-        /*}*/
+
+        #ri { /* основной див с контентом */
+
+            width: 90%;
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            left: 0;
+            background: whitesmoke;
+            color: #fff;
+
+            height: 77%;
+            opacity: 0.8;
+            color:#567ec4;
+            font-size: 15px;
+            /*font-style: italic;*/
+            font-weight: bold;
+            /*display: flex;*/
+            justify-content:center;
+            align-items:center;
+            margin-top: 5%;
+            margin-bottom: 5%;
+            margin-right: 5%;
+            margin-left: 5%;
+        }
+        .block {
+            width: 90%;
+            height: 90%;
+            text-align: center;
+            line-height: 100px;
+            border-radius: 10px;
+            border: 2px solid darkgreen;
+            margin: 15px;
+            margin-bottom: 15px;
+            margin-top: 15px;
+            align-items: center;
+        }
+        p{
+            margin: 15px;
+            color: #567ec4;
+            line-height: 1.5;
+            text-align: justify;
+        }
+
+
         table {
             color: #567ec4;
             line-height: 1.5;
-            text-align: justify;
             font-weight: bold;
-            padding: 3px;
             border-color: black;
+            margin: 15px;
         }
-
+        th {
+            color: #567ec4;
+            line-height: 1.5;
+            text-align: center;
+            font-weight: bold;
+            padding: 8px;
+        }
         td {
             color: #567ec4;
             line-height: 1.5;
-            text-align: justify;
+            text-align: center;
             font-weight: bold;
-            padding: 3px;
-            border-color: black;
+            padding: 8px;
         }
+h2 {
+    margin: 15px;
+    color: #567ec4;
+    line-height: 1.5;
+    text-align: justify;
+}
+
+h3 {
+    margin: 15px;
+    color: #567ec4;
+    line-height: 1.5;
+    text-align: justify;
+}
+
+        h4 {
+            margin: 15px;
+            color: #567ec4;
+            line-height: 1.5;
+            text-align: justify;
+        }
+
+        #in {
+            float: left;
+            margin: 15px;
+        }
+        button {
+            float: left;
+            margin: 15px;
+        }
+
     </style>
     <title>the BOOK</title>
-
 </head>
 <br>
 
@@ -45,10 +115,10 @@
 <form method="POST" action="MainPageServlet">
     <div id="div">
         <a href="MainPageServlet">Главная страница</a>
-        <a href="BookInfoServlet">About</a>
         <a href="ContactServlet">Контакты</a>
-        <a href="LoginServlet">Вход</a>
-        <a href="RegisterServlet">Регистрация</a>
+<%--        <a href="LoginServlet">Вход</a>--%>
+        <a href="LogoutServlet">Выход</a>
+<%--        <a href="RegisterServlet">Регистрация</a>--%>
         <input id="input" name="title" type="text" placeholder="Поиск"/>
     </div>
 </form>
@@ -78,54 +148,82 @@
     <%@page import="by.iba.model.LineItem"%>
     <%-- if there is already a Cart bean created inside the session scope, this will not ininitiate a new object --%>
     <jsp:useBean id="cart" scope="session" class="by.iba.model.Cart"></jsp:useBean>
-    <h2>Book Store Checkout Page</h2>
+
+    <div id="ri">
+        <div class="block">
+    <h2>Корзина</h2>
 
     <c:if test="${not empty cart.items}">
-        <table class="table table-striped">
-            <thead>
-            <th>Title</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Total Price</th>
-            <th></th>
-            </thead>
-            <tbody>
+
+        <table border="black">
+            <tr><th>Название</th><th>Цена</th><th>Количество</th><th colspan="2">Удалить из корзины</th></tr>
+<%--        </table>--%>
+<%--        <table>--%>
+<%--&lt;%&ndash;            <thead>&ndash;%&gt;--%>
+<%--            <th>Title</th>--%>
+<%--            <th>Price</th>--%>
+<%--            <th>Quantity</th>--%>
+<%--&lt;%&ndash;            <th>Total Price</th>&ndash;%&gt;--%>
+<%--&lt;%&ndash;            <th></th>&ndash;%&gt;--%>
+<%--&lt;%&ndash;            </thead>&ndash;%&gt;--%>
+<%--            <tbody>--%>
             <c:forEach var="item" items="${cart.items}">
                 <form method="POST" action="CartController">
-                    <tr style="text-align: left">
-                        <td>
-                            ${item.title}
-                            ${item.price}
-                        </td>
-                        <td>
-                            <input type="hidden" name="bookID" value="${item.bookID}">
-                            <input type="text" name="updateQuantity" size="2" value="${item.quantity}">
+                    <tr><td>${item.title}</td>
+                        <td>${item.price}</td>
+                        <td><input type="hidden" name="bookID" value="${item.bookID}">
+                        <input type="text" name="updateQuantity" size="2" value="${item.quantity}">
 
-                            <input type="submit" value="Update">
-                        </td>
+                        <input type="submit" value="Добавить"></td>
 
                         <td>${item.title}</td>
-                        <td><fmt:formatNumber value="${item.price}" type="currency"></fmt:formatNumber></td>
-                        <td><fmt:formatNumber value="${item.totalPrice}" type="currency"></fmt:formatNumber></td>
-                        <td><input type="submit" name="remove" value="Remove"></td>
+<%--                        <td><fmt:formatNumber value="${item.price}" type="currency"></fmt:formatNumber></td>--%>
+<%--                        <td><fmt:formatNumber value="${item.totalPrice}" type="currency"></fmt:formatNumber></td>--%>
+                        <td><input type="submit" name="remove" value="Удалить из корзины"></td>
+
+
                     </tr>
+<%--                    <tr style="text-align: left">--%>
+<%--                        <td>--%>
+<%--                            ${item.title}--%>
+<%--                            ${item.price}--%>
+<%--                        </td>--%>
+<%--                        <td>--%>
+<%--                            <input type="hidden" name="bookID" value="${item.bookID}">--%>
+<%--                            <input type="text" name="updateQuantity" size="2" value="${item.quantity}">--%>
+
+<%--                            <input type="submit" value="Добавить">--%>
+<%--                        </td>--%>
+<%--<p> </p>--%>
+<%--                        <td>${item.title}</td>--%>
+<%--                        <td><fmt:formatNumber value="${item.price}" type="currency"></fmt:formatNumber></td>--%>
+<%--                        <td><fmt:formatNumber value="${item.totalPrice}" type="currency"></fmt:formatNumber></td>--%>
+<%--                        <td><input type="submit" name="remove" value="Удалить из корзины"></td>--%>
+<%--                    </tr>--%>
                 </form>
 
             </c:forEach>
 
-            </tbody>
+<%--            </tbody>--%>
         </table>
 
 
-        <h3>Total price of all items: ${cart.items.stream().map(i -> i.totalPrice).sum()} </h3>
-        <input type="submit" class="btn btn-sucess" value="Checkout"></input>
-        <button class="btn btn-sucess"><a href="MainPageServlet">Continue Shopping</a></button>
+        <h3>Итоговая цена: ${cart.items.stream().map(i -> i.totalPrice).sum()} </h3>
+            <form method="POST" action="MainPageServlet">
+                <input id="in" type="submit" name="remove" value="Обратно к покупкам">
+            </form>
+<%--        <button class="btn btn-sucess"></button>--%>
 
+<%--            <a href="MainPageServlet">Обратно к покупкам</a>--%>
+        <p> </p>
+        <input type="submit" id="in" value="Перейти к олате">
     </c:if>
     <c:if test="${empty cart.items}">
-        <h4>Sorry, you haven't placed any order yet. Back to the home page to browse more books.</h4>
+        <h4>Корзина пуста. Вернитесь на главную страницу, чтобы просмотреть другие книги.</h4>
     </c:if>
 </div>
+    </div>
+
 <div id="footer">
     Все права защищены &copy;
 </div>

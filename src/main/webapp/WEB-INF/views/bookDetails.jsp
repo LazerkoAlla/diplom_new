@@ -72,6 +72,7 @@
             <a href="MainPageServlet">Главная страница</a>
             <a href="CartController">Корзина</a>
             <a href="ContactServlet">Контакты</a>
+<%--            <a href="LoginServlet">Вход</a>--%>
             <a href="LogoutServlet">Выход</a>
             <input id="input" name="title" type="text" placeholder="Поиск"/>
         </div>

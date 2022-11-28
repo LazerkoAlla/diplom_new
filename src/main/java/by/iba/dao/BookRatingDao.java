@@ -1,14 +1,12 @@
 package by.iba.dao;
 
-import by.iba.model.Book;
 import by.iba.model.BookRating;
 import by.iba.util.ConnectorDB;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-import java.sql.*;
-import java.util.LinkedList;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class BookRatingDao {
 
